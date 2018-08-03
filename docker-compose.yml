@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  openldap:
+    image: osixia/openldap:1.2.0
+    environment:
+      LDAP_TLS_VERIFY_CLIENT: try
+    ports:
+      - "2389:389"
+
+  shibboleth:
+    build:
+      context: ./shibboleth
+      dockerfile: Dockerfile
+    ports:
+      - "9080:9080"
+      - "9443:9443"
+    links:
+      - openldap
