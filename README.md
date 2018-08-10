@@ -57,10 +57,9 @@ Each time you change the Shibboleth configuration, you have to restart jetty:
 Now you have to add some IdP information to your SP configuration.
 
 The IdP _entityId_ is `https://my-sp/idp`, and the _signing_ and _encryption_
-certificates (_.crt_) are available in the credentials directory:
-
-    # ls /opt/shibboleth-idp/credentials 
-
+certificates (_.crt_) are available in the credentials directory `/opt/shibboleth-idp/credentials`, 
+but all this information is available on the IdP metadata: 
+[https://localhost:9443/idp/shibboleth]()
 
 After setting up all configurations, your SP should be able to authenticate.
 
