@@ -46,6 +46,9 @@ RUN sed -i -e 's!localhost/!localhost:9443/!g' /opt/shibboleth-idp/metadata/idp-
 RUN sed -i -e 's/#idp.encryption.optional = false/idp.encryption.optional = true/g' /opt/shibboleth-idp/conf/idp.properties
 ADD files/metadata-providers.xml /opt/shibboleth-idp/conf/
 
+RUN sed -i -e 's!<PolicyRequirementRule xsi:type="Requester" value="https://sp.example.org" />!<PolicyRequirementRule xsi:type="Requester" value="http://my-sp/sp2" />!g' /opt/shibboleth-idp/conf/attribute-filter.xml
+RUN sed -i -e 's/name="urn:oid:0.9.2342.19200300.100.1.1"/name="username"/g' /opt/shibboleth-idp/conf/attribute-resolver.xml
+
 ADD files/ldap.properties /opt/shibboleth-idp/conf/
 ADD files/start.sh /
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /
